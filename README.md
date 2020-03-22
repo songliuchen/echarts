@@ -16,4 +16,4 @@
 - index.html
 
 ##### 效果图
-![静态代码检查首页](demo.png)
+![效果图](demo.png)
