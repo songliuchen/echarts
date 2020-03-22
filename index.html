@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html style="width:100%;height:100%">
+<head>
+    <title>graph</title>
+    <meta charset="utf-8">
+</head>
+<body style="width:100%;height:100%">
+<script type="text/javascript" src="dist/echarts.js"></script>
+<div id="main" style="width: 100%;height: 100%"></div>
+<script type="text/javascript">
+    var dom = document.getElementById('main');
+    var myChart = echarts.init(dom);
+    var data ={ nodes: [{
+            id: 'a1',
+            name:'节点a',
+            "symbolSize": 60,
+            "draggable": "true",
+        }, {
+            id: 'a2',
+            name:'节点b',
+            "symbolSize": 60,
+          "draggable": "true",
+        }
+        // , {
+        //     id: 'a3',
+        //     name:'节点c',
+        //     "symbolSize": 60,
+        //   "draggable": "true",
+        // }, {
+        //     id: 'a4',
+        //     name:'节点d',
+        //     "symbolSize": 60,
+        //   "draggable": "true",
+        // }, {
+        //     id: 'a5',
+        //     name:'节点e',
+        //     "symbolSize": 60,
+        //   "draggable": "true",
+        // }, {
+        //     id: 'a6',
+        //     name:'节点f',
+        //     "symbolSize": 60,
+        //   "draggable": "true",
+        // }
+    ],
+        links: [{
+            id:'1-2',
+            source: "a1",
+            target: "a2",
+            name: "朋友"
+        },
+        // {
+        //     id:'1-3',
+        //     source: "a1",
+        //     target: "a3",
+        //     name: "朋友"
+        // }, {
+        //     id:'1-4',
+        //     source: "a1",
+        //     target: "a4",
+        //     name: "家人"
+        // }, {
+        //     id:'1-5',
+        //     source: "a1",
+        //     target: "a5",
+        //     name: "家人"
+        // }, {
+        //     id:'1-6',
+        //     source: "a1",
+        //     target: "a6",
+        //     name: "家人"
+        // },
+        {
+            id:'1-2',
+            source: "a1",
+            target: "a2",
+            name: "仇人"
+        },
+        {
+            id:'1-2',
+            source: "a1",
+            target: "a2",
+            name: "仇人2"
+        },
+        {
+            id:'1-2',
+            source: "a1",
+            target: "a2",
+            name: "仇人3"
+        }]}
+    var option =  {
+      tooltip: {},
+      animationDuration: 1000,
+      animationEasingUpdate: 'quinticInOut',
+      series:[{
+          type: 'graph',
+          layout: 'force',
+          force: {
+            repulsion: 500,
+            gravity: 0.1,
+            edgeLength: 200,
+            layoutAnimation: true,
+        },
+        roam: true,
+        edgeSymbol: ['circle', 'arrow'],
+        edgeLabel: {
+            normal: {
+                show: true,
+                textStyle: {
+                    fontSize: 14
+                },
+                formatter: function(params){
+                    return params.data.name
+                },
+            }
+        },
+          data: data.nodes,
+          links:data.links,
+          label: {
+            normal: {
+                show: true,
+                position: 'inside',
+                formatter: function(params){
+                    return params.data.name
+                },
+                fontSize: 16,
+                fontStyle: '500',
+                }
+            },
+            lineStyle: {
+                normal: {
+                    width: 1,
+                    // curveness: 0.2,
+                    type: "solid"
+                }
+            }
+        }
+      ]};
+myChart.setOption(option);
+</script>
+</body>
+</html>
