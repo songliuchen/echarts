@@ -10,90 +10,220 @@
 <script type="text/javascript">
     var dom = document.getElementById('main');
     var myChart = echarts.init(dom);
-    var data ={ nodes: [{
+    var data ={ nodes: [
+        {
             id: 'a1',
             name:'节点a',
             "symbolSize": 60,
             "draggable": "true",
-        }, {
+        },
+         {
             id: 'a2',
             name:'节点b',
             "symbolSize": 60,
           "draggable": "true",
         }
-        , {
+        ,{
             id: 'a3',
             name:'节点c',
             "symbolSize": 60,
           "draggable": "true",
-        }, 
-        {
+        }
+        ,{
             id: 'a4',
             name:'节点d',
             "symbolSize": 60,
           "draggable": "true",
-        }, {
+        }
+        ,{
             id: 'a5',
             name:'节点e',
             "symbolSize": 60,
           "draggable": "true",
-        }, {
+        }
+        ,{
             id: 'a6',
             name:'节点f',
             "symbolSize": 60,
           "draggable": "true",
         }
     ],
-        links: [{
+        links: [
+        {
             id:'1-2',
             source: "a1",
             target: "a2",
             name: "朋友"
-        },
-        {
+        }
+        ,{
+            id:'1-2',
+            source: "a1",
+            target: "a2",
+            name: "亲戚",
+            lineStyle:
+            {
+                normal: {
+                    color: 'yellow'
+                }
+            }
+        }
+        ,{
+            id:'1-2',
+            source: "a1",
+            target: "a2",
+            name: "家人2",
+            lineStyle:
+            {
+                normal: {
+                    color: 'green'
+                }
+            }
+        }
+        ,{
+            id:'1-2',
+            source: "a1",
+            target: "a2",
+            name: "家人3",
+            lineStyle:
+            {
+                normal: {
+                    color: 'blue'
+                }
+            }
+        }
+        ,{
+            id:'1-2',
+            source: "a2",
+            target: "a1",
+            name: "反向",
+            lineStyle:
+            {
+                normal: {
+                    color: 'red'
+                }
+            }
+        }
+        ,{
             id:'1-3',
             source: "a1",
             target: "a3",
             name: "朋友"
-        }, {
+        }
+        ,{
             id:'1-4',
             source: "a1",
             target: "a4",
             name: "家人"
-        }, {
-            id:'1-5',
-            source: "a1",
-            target: "a5",
-            name: "家人"
-        }, {
+        }
+        ,{
             id:'1-6',
             source: "a1",
             target: "a6",
             name: "家人"
-        },
-        {
-            id:'1-2',
-            source: "a1",
-            target: "a2",
-            name: "仇人"
-        },
-        {
-            id:'1-2',
-            source: "a1",
-            target: "a2",
-            name: "仇人2"
-        },
-        {
-            id:'1-2',
-            source: "a1",
-            target: "a2",
-            name: "仇人3"
-        },
-        {
-            id:'1-2',
+        }
+        ,{
+            id:'2-5',
             source: "a2",
-            target: "a1",
-            name: "反向"
+            target: "a5",
+            name: "家人",
+            lineStyle:
+            {
+                normal: {
+                    color: 'green',
+                    curveness: 0.2
+                },
+            }
+        }
+        ,{
+            id:'2-5',
+            source: "a2",
+            target: "a5",
+            name: "亲戚",
+            lineStyle:
+            {
+                normal: {
+                    color: 'blue',
+                    curveness: 0.2
+                },
+            }
+        }
+        ,{
+            id:'2-5',
+            source: "a5",
+            target: "a2",
+            name: "家人",
+            lineStyle:
+            {
+                normal: {
+                    color: 'green',
+                    curveness: 0.2
+                },
+            }
+        }
+        ,{
+            id:'2-5',
+            source: "a5",
+            target: "a2",
+            name: "家人",
+            lineStyle:
+            {
+                normal: {
+                    color: 'black',
+                    curveness: 0.2
+                },
+            }
+        }
+        ,{
+            id:'3-5',
+            source: "a5",
+            target: "a3",
+            name: "家人",
+            lineStyle:
+            {
+                normal: {
+                    color: 'black',
+                    curveness: 0.2
+                },
+            }
+        }
+        ,{
+            id:'3-5',
+            source: "a5",
+            target: "a3",
+            name: "家人",
+            lineStyle:
+            {
+                normal: {
+                    color: 'black',
+                    curveness: 0.2
+                },
+            }
+        }
+        ,{
+            id:'3-5',
+            source: "a5",
+            target: "a3",
+            name: "家人",
+            lineStyle:
+            {
+                normal: {
+                    color: 'black',
+                    curveness: 0.2
+                },
+            }
+        }
+        ,{
+            id:'3-5',
+            source: "a5",
+            target: "a3",
+            name: "家人",
+            lineStyle:
+            {
+                normal: {
+                    color: 'black',
+                    curveness: 0.2
+                },
+            }
         }
     ]}
     var option =  {
@@ -138,7 +268,6 @@
             lineStyle: {
                 normal: {
                     width: 1,
-                    // curveness: 0.2,
                     type: "solid"
                 }
             }

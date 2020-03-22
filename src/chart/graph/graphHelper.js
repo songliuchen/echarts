@@ -54,13 +54,24 @@ export function updateMultRelationPosition(graph)
     {
         var edge = graph.getEdgeByIndex(i);
         var key = edge.node1["id"]+'-'+edge.node2["id"];
-        var key2 = edge.node2["id"]+'-'+edge.node1["id"];
-        if(!sameEdgesCount[key] && !sameEdgesCount[key2])
-            sameEdgesCount[key] = [1,1];
-        else if(sameEdgesCount[key])
-            sameEdgesCount[key][0]++;
-        else if(sameEdgesCount[key2])
-            sameEdgesCount[key2][0]++;
+        var curveness = edge.getModel().get('lineStyle.curveness') || 0;
+        if (+curveness)
+        {
+            if(!sameEdgesCount[key])
+                sameEdgesCount[key] = [1,1];
+            else
+                sameEdgesCount[key][0]++;
+        }
+        else
+        {
+            var key2 = edge.node2["id"]+'-'+edge.node1["id"];
+            if(!sameEdgesCount[key] && !sameEdgesCount[key2])
+                sameEdgesCount[key] = [1,1];
+            else if(sameEdgesCount[key])
+                sameEdgesCount[key][0]++;
+            else if(sameEdgesCount[key2])
+                sameEdgesCount[key2][0]++;
+        }
     }
     //连线之间偏移量
     var vector = 16;
@@ -108,11 +119,21 @@ export function updateMultRelationPosition(graph)
         }
         var sin = x/Math.sqrt(Math.pow(x,2)+Math.pow(y,2))
         var cos = y/Math.sqrt(Math.pow(x,2)+Math.pow(y,2))
-        layout[0][0] = layout[0][0] + offset*cos;
-        layout[0][1] = layout[0][1] - offset*sin;
+        //如果是弧线，弧线中间点也得处理 
+        var curveness = edge.getModel().get('lineStyle.curveness') || 0;
+        if (+curveness)
+        {
+            layout[2][0] =layout[2][0] + offset*cos;
+            layout[2][1] = layout[2][1] - offset*sin;
+        }
+        else
+        {
+            layout[0][0] = layout[0][0] + offset*cos;
+            layout[0][1] = layout[0][1] - offset*sin;
 
-        layout[1][0] = layout[1][0] + offset*cos;
-        layout[1][1] = layout[1][1] - offset*sin;
+            layout[1][0] = layout[1][0] + offset*cos;
+            layout[1][1] = layout[1][1] - offset*sin;
+        }
         edge.setLayout(layout);
         // console.log(i+"x1:"+layout[0][0]+"y1:"+layout[0][1]+"x2:"+layout[1][0]+"y2:"+layout[1][1])
         sameEdgesCount[key][1]++;
