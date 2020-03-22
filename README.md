@@ -7,7 +7,7 @@
 - src/chart/simpleLayoutHelper.js   ----- 不同视图引用
 - src/chart/forceHelper.js   ----- 不同视图引用
 #### 验证情况：
-- forceLayout视图模式
+- 只在forceLayout视图模式，其他视图请自行验证
 - 正向、逆向、弧线情况
 - 只限制关系在3000以内使用，3000以外效率问题没验证
 - 为避免修改源码过多，代码尽量在一个文件修改，其他地方引用，实现可再优化，可根据实际情况再定
