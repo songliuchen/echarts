@@ -53,23 +53,36 @@ export function updateMultRelationPosition(graph)
     for(var i = 0;i<edges.length;i++)
     {
         var edge = graph.getEdgeByIndex(i);
-        var key = edge.node1["id"]+'-'+edge.node1["id"];
-        if(!sameEdgesCount[key])
+        var key = edge.node1["id"]+'-'+edge.node2["id"];
+        var key2 = edge.node2["id"]+'-'+edge.node1["id"];
+        if(!sameEdgesCount[key] && !sameEdgesCount[key2])
             sameEdgesCount[key] = [1,1];
-        else
+        else if(sameEdgesCount[key])
             sameEdgesCount[key][0]++;
+        else if(sameEdgesCount[key2])
+            sameEdgesCount[key2][0]++;
     }
+    //连线之间偏移量
+    var vector = 16;
     for(var i = 0;i<edges.length;i++)
     {
         var edge = graph.getEdgeByIndex(i);
-        var key = edge.node1["id"]+'-'+edge.node1["id"];
+        var key = edge.node1["id"]+'-'+edge.node2["id"];
+        var isReverse = false;
+        if(!sameEdgesCount[key])
+        {
+            key = edge.node2["id"]+'-'+edge.node1["id"];
+            isReverse = true;
+        }
         if(sameEdgesCount[key][0] == 1)
             continue;
         var offset = 0;
         //区分单双数处理情况
+        //双数，奇数、偶数往不同方向移动
+        //单数，第一条边位置不变，其余边按奇偶数往不同方向移动
         if(sameEdgesCount[key][0] %2 ==0)
         {
-            offset = Math.floor((sameEdgesCount[key][1]-1)/2)*20+10;
+            offset = Math.floor((sameEdgesCount[key][1]-1)/2)*vector+vector/2;
             offset = sameEdgesCount[key][1]%2==0?-offset:offset;
         }
         else
@@ -81,13 +94,18 @@ export function updateMultRelationPosition(graph)
             }
             else
             {
-                offset = Math.floor((sameEdgesCount[key][1])/2)*20;
+                offset = Math.floor((sameEdgesCount[key][1])/2)*vector;
                 offset = sameEdgesCount[key][1]%2==0?offset:-offset;
             }
         }
         var layout = edge.getLayout();
         var x = layout[1][0] - layout[0][0];
         var y = layout[1][1] - layout[0][1];
+        if(isReverse)
+        {
+            x = -x;
+            y = -y;
+        }
         var sin = x/Math.sqrt(Math.pow(x,2)+Math.pow(y,2))
         var cos = y/Math.sqrt(Math.pow(x,2)+Math.pow(y,2))
         layout[0][0] = layout[0][0] + offset*cos;
@@ -96,8 +114,8 @@ export function updateMultRelationPosition(graph)
         layout[1][0] = layout[1][0] + offset*cos;
         layout[1][1] = layout[1][1] - offset*sin;
         edge.setLayout(layout);
+        // console.log(i+"x1:"+layout[0][0]+"y1:"+layout[0][1]+"x2:"+layout[1][0]+"y2:"+layout[1][1])
         sameEdgesCount[key][1]++;
     }
 }
 //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
-

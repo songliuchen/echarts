@@ -21,27 +21,28 @@
             "symbolSize": 60,
           "draggable": "true",
         }
-        // , {
-        //     id: 'a3',
-        //     name:'节点c',
-        //     "symbolSize": 60,
-        //   "draggable": "true",
-        // }, {
-        //     id: 'a4',
-        //     name:'节点d',
-        //     "symbolSize": 60,
-        //   "draggable": "true",
-        // }, {
-        //     id: 'a5',
-        //     name:'节点e',
-        //     "symbolSize": 60,
-        //   "draggable": "true",
-        // }, {
-        //     id: 'a6',
-        //     name:'节点f',
-        //     "symbolSize": 60,
-        //   "draggable": "true",
-        // }
+        , {
+            id: 'a3',
+            name:'节点c',
+            "symbolSize": 60,
+          "draggable": "true",
+        }, 
+        {
+            id: 'a4',
+            name:'节点d',
+            "symbolSize": 60,
+          "draggable": "true",
+        }, {
+            id: 'a5',
+            name:'节点e',
+            "symbolSize": 60,
+          "draggable": "true",
+        }, {
+            id: 'a6',
+            name:'节点f',
+            "symbolSize": 60,
+          "draggable": "true",
+        }
     ],
         links: [{
             id:'1-2',
@@ -49,27 +50,27 @@
             target: "a2",
             name: "朋友"
         },
-        // {
-        //     id:'1-3',
-        //     source: "a1",
-        //     target: "a3",
-        //     name: "朋友"
-        // }, {
-        //     id:'1-4',
-        //     source: "a1",
-        //     target: "a4",
-        //     name: "家人"
-        // }, {
-        //     id:'1-5',
-        //     source: "a1",
-        //     target: "a5",
-        //     name: "家人"
-        // }, {
-        //     id:'1-6',
-        //     source: "a1",
-        //     target: "a6",
-        //     name: "家人"
-        // },
+        {
+            id:'1-3',
+            source: "a1",
+            target: "a3",
+            name: "朋友"
+        }, {
+            id:'1-4',
+            source: "a1",
+            target: "a4",
+            name: "家人"
+        }, {
+            id:'1-5',
+            source: "a1",
+            target: "a5",
+            name: "家人"
+        }, {
+            id:'1-6',
+            source: "a1",
+            target: "a6",
+            name: "家人"
+        },
         {
             id:'1-2',
             source: "a1",
@@ -87,7 +88,14 @@
             source: "a1",
             target: "a2",
             name: "仇人3"
-        }]}
+        },
+        {
+            id:'1-2',
+            source: "a2",
+            target: "a1",
+            name: "反向"
+        }
+    ]}
     var option =  {
       tooltip: {},
       animationDuration: 1000,
