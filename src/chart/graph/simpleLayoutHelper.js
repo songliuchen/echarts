@@ -33,10 +33,12 @@ export function simpleLayout(seriesModel) {
         node.setLayout([+model.get('x'), +model.get('y')]);
     });
 
-    simpleLayoutEdge(graph);
+    //TODO:song 解决node之间多连线重叠问题，入参处修改，添加了seriesModel 对象 -----------------------------------------
+    simpleLayoutEdge(graph,seriesModel);
 }
 
-export function simpleLayoutEdge(graph) {
+//TODO:song 解决node之间多连线重叠问题，入参处修改，添加了seriesModel 对象 -----------------------------------------
+export function simpleLayoutEdge(graph,seriesModel) {
     graph.eachEdge(function (edge) {
         var curveness = edge.getModel().get('lineStyle.curveness') || 0;
         var p1 = vec2.clone(edge.node1.getLayout());
@@ -51,6 +53,6 @@ export function simpleLayoutEdge(graph) {
         edge.setLayout(points);
     });
     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
-    updateMultRelationPosition(graph);
+    updateMultRelationPosition(graph,seriesModel);
     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
 }

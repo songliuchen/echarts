@@ -43,7 +43,7 @@ export function getSymbolSize(node) {
 }
 
 //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
-export function updateMultRelationPosition(graph)
+export function updateMultRelationPosition(graph,seriesModel)
 {
     var edges = graph.edges
     //大于3000个关系，不处理，避免影响效率，后续 添加根据当前缩放比例控制是否显示
@@ -74,7 +74,8 @@ export function updateMultRelationPosition(graph)
         }
     }
     //连线之间偏移量
-    var vector = 16;
+    var scale =getNodeGlobalScale(seriesModel);
+    var vector = 16*scale;
     for(var i = 0;i<edges.length;i++)
     {
         var edge = graph.getEdgeByIndex(i);
@@ -85,7 +86,7 @@ export function updateMultRelationPosition(graph)
             key = edge.node2["id"]+'-'+edge.node1["id"];
             isReverse = true;
         }
-        if(sameEdgesCount[key][0] == 1)
+        if(sameEdgesCount[key][0] == 1 && edge.node1.id !=edge.node2.id)
             continue;
         var offset = 0;
         //区分单双数处理情况
@@ -98,7 +99,7 @@ export function updateMultRelationPosition(graph)
         }
         else
         {
-            if(sameEdgesCount[key][1] ==1)
+            if(sameEdgesCount[key][1] ==1 && edge.node1.id !=edge.node2.id)
             {
                 sameEdgesCount[key][1]++;
                 continue;
@@ -123,8 +124,24 @@ export function updateMultRelationPosition(graph)
         var curveness = edge.getModel().get('lineStyle.curveness') || 0;
         if (+curveness)
         {
-            layout[2][0] =layout[2][0] + offset*cos;
-            layout[2][1] = layout[2][1] - offset*sin;
+            if(edge.node1.id !=edge.node2.id)
+            {
+                layout[2][0] =layout[2][0] + offset*cos;
+                layout[2][1] = layout[2][1] - offset*sin;
+            }
+            else
+            {
+                //处理边起点和终点都是自己的情况
+                var symbolSize = edge.node1.getModel().get("symbolSize");
+                if(!symbolSize)
+                    symbolSize = 60;
+                symbolSize = (symbolSize/2)*scale;
+                layout[0][0] =layout[0][0] - symbolSize;
+                layout[0][1] =layout[0][1] +symbolSize;
+                layout[1][0] = layout[1][0] +symbolSize;
+                layout[1][1] =layout[1][1] +symbolSize;
+                layout[2][1] = layout[2][1] - symbolSize*5;
+            }
         }
         else
         {

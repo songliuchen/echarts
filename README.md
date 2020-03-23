@@ -17,3 +17,7 @@
 
 ##### 效果图
 ![效果图](demo.png)
+
+##### 调试、打包
+- npm run release 打包所有
+- npm run watch 本地调试

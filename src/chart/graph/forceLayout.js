@@ -137,7 +137,7 @@ export default function (ecModel) {
                     }
                     // Update layout
                     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
-                    updateMultRelationPosition(graph);
+                    updateMultRelationPosition(graph,graphSeries);
                     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
                     cb && cb(stopped);
                 });
