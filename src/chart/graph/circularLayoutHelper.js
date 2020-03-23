@@ -94,7 +94,7 @@ export function circularLayout(seriesModel, basedOn) {
         edge.setLayout([p1, p2, cp1]);
     });
     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
-    updateMultRelationPosition(graph);
+    updateMultRelationPosition(graph,seriesModel);
     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
 }
 

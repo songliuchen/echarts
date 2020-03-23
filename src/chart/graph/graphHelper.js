@@ -147,7 +147,6 @@ export function updateMultRelationPosition(graph,seriesModel)
         {
             layout[0][0] = layout[0][0] + offset*cos;
             layout[0][1] = layout[0][1] - offset*sin;
-
             layout[1][0] = layout[1][0] + offset*cos;
             layout[1][1] = layout[1][1] - offset*sin;
         }
