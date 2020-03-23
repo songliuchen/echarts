@@ -140,7 +140,7 @@ export function updateMultRelationPosition(graph,seriesModel)
                 layout[0][1] =layout[0][1] +symbolSize;
                 layout[1][0] = layout[1][0] +symbolSize;
                 layout[1][1] =layout[1][1] +symbolSize;
-                layout[2][1] = layout[2][1] - symbolSize*5;
+                layout[2][1] = layout[2][1] - symbolSize*(3+sameEdgesCount[key][1]);
             }
         }
         else
