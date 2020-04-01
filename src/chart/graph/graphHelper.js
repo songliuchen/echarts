@@ -53,6 +53,8 @@ export function updateMultRelationPosition(graph,seriesModel)
     for(var i = 0;i<edges.length;i++)
     {
         var edge = graph.getEdgeByIndex(i);
+        if(!edge)
+            continue;
         var key = edge.node1["id"]+'-'+edge.node2["id"];
         var curveness = edge.getModel().get('lineStyle.curveness') || 0;
         if (+curveness)
@@ -79,6 +81,8 @@ export function updateMultRelationPosition(graph,seriesModel)
     for(var i = 0;i<edges.length;i++)
     {
         var edge = graph.getEdgeByIndex(i);
+        if(!edge)
+            continue;
         var key = edge.node1["id"]+'-'+edge.node2["id"];
         var isReverse = false;
         if(!sameEdgesCount[key])
