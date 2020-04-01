@@ -57426,6 +57426,8 @@ function updateMultRelationPosition(graph,seriesModel)
     for(var i = 0;i<edges.length;i++)
     {
         var edge = graph.getEdgeByIndex(i);
+        if(!edge)
+            continue;
         var key = edge.node1["id"]+'-'+edge.node2["id"];
         var curveness = edge.getModel().get('lineStyle.curveness') || 0;
         if (+curveness)
@@ -57452,6 +57454,8 @@ function updateMultRelationPosition(graph,seriesModel)
     for(var i = 0;i<edges.length;i++)
     {
         var edge = graph.getEdgeByIndex(i);
+        if(!edge)
+            continue;
         var key = edge.node1["id"]+'-'+edge.node2["id"];
         var isReverse = false;
         if(!sameEdgesCount[key])
@@ -57520,7 +57524,6 @@ function updateMultRelationPosition(graph,seriesModel)
         {
             layout[0][0] = layout[0][0] + offset*cos;
             layout[0][1] = layout[0][1] - offset*sin;
-
             layout[1][0] = layout[1][0] + offset*cos;
             layout[1][1] = layout[1][1] - offset*sin;
         }
@@ -58593,7 +58596,7 @@ function circularLayout$1(seriesModel, basedOn) {
         edge.setLayout([p1, p2, cp1]);
     });
     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
-    updateMultRelationPosition(graph);
+    updateMultRelationPosition(graph,seriesModel);
     //TODO:song 解决node之间多连线重叠问题 -----------------------------------------
 }
 

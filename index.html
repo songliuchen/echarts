@@ -8,6 +8,12 @@
 <script type="text/javascript" src="dist/echarts.js"></script>
 <div id="main" style="width: 100%;height: 100%"></div>
 <script type="text/javascript">
+var categories = [];
+    for (var i = 0; i < 4; i++) {
+        categories[i] = {
+            name: i+""
+        };
+    }
     var dom = document.getElementById('main');
     var myChart = echarts.init(dom);
     var data ={ nodes: [
@@ -16,42 +22,49 @@
             name:'节点a',
             "symbolSize": 60,
             "draggable": "true",
+            "category":'1',
         },
          {
             id: 'a2',
             name:'节点b',
             "symbolSize": 60,
           "draggable": "true",
+          category:'1',
         }
         ,{
             id: 'a3',
             name:'节点c',
             "symbolSize": 60,
           "draggable": "true",
+          category:'2',
         }
         ,{
             id: 'a4',
             name:'节点d',
             "symbolSize": 60,
           "draggable": "true",
+          category:'2',
         }
         ,{
             id: 'a5',
             name:'节点e',
             "symbolSize": 60,
           "draggable": "true",
+          category:'2',
         }
         ,{
             id: 'a6',
             name:'节点f',
             "symbolSize": 60,
           "draggable": "true",
+          category:'2',
         }
         ,{
             id: 'a7',
             name:'节点g',
             "symbolSize": 60,
           "draggable": "true",
+          category:'3',
         }
     ],
         links: [
@@ -59,13 +72,15 @@
             id:'1-2',
             source: "a1",
             target: "a2",
-            name: "朋友"
+            name: "朋友",
+            category:'2',
         }
         ,{
             id:'1-2',
             source: "a1",
             target: "a2",
             name: "亲戚",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -78,6 +93,7 @@
             source: "a1",
             target: "a2",
             name: "家人2",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -90,6 +106,7 @@
             source: "a1",
             target: "a2",
             name: "家人3",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -102,6 +119,7 @@
             source: "a2",
             target: "a1",
             name: "反向",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -113,18 +131,21 @@
             id:'1-3',
             source: "a1",
             target: "a3",
+            category:'2',
             name: "朋友"
         }
         ,{
             id:'1-4',
             source: "a1",
             target: "a4",
+            category:'2',
             name: "家人"
         }
         ,{
             id:'1-6',
             source: "a1",
             target: "a6",
+            category:'2',
             name: "家人"
         }
         ,{
@@ -132,6 +153,7 @@
             source: "a2",
             target: "a5",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -145,6 +167,7 @@
             source: "a2",
             target: "a5",
             name: "亲戚",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -158,6 +181,7 @@
             source: "a5",
             target: "a2",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -171,6 +195,7 @@
             source: "a5",
             target: "a2",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -184,6 +209,7 @@
             source: "a5",
             target: "a3",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -197,6 +223,7 @@
             source: "a5",
             target: "a3",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -210,6 +237,7 @@
             source: "a5",
             target: "a3",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -223,6 +251,7 @@
             source: "a5",
             target: "a3",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -236,6 +265,7 @@
             source: "a1",
             target: "a7",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -249,6 +279,7 @@
             source: "a7",
             target: "a7",
             name: "家人",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -262,6 +293,7 @@
             source: "a7",
             target: "a7",
             name: "家人2",
+            category:'2',
             lineStyle:
             {
                 normal: {
@@ -275,6 +307,11 @@
       tooltip: {},
       animationDuration: 1000,
       animationEasingUpdate: 'quinticInOut',
+      legend: [{
+            data: categories.map(function (a) {
+                return a.name;
+            })
+        }],
       series:[{
           type: 'graph',
           layout: 'force',
@@ -299,6 +336,7 @@
         },
           data: data.nodes,
           links:data.links,
+          categories: categories,
           label: {
             normal: {
                 show: true,
